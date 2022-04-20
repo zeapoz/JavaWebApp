@@ -5,27 +5,32 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Register</title>
+  <div th:replace="fragments/include"></div>
 </head>
 <body>
-  <h1>Register</h1>
+  <div th:replace="fragments/navbar"></div>
+  <div class="container-fluid">
+    <h1>Register</h1>
 
-  <form th:action="@{/register/save}" method="post" th:object="${appUser}">
-  <input type="hidden" th:field="*{Id}" />
-  <div>
-    <label>Email</label>
-    <input type="email" th:field="*{email}" required minlength="2" maxlength="45"/>
-  </div>
-  <div>
-    <label>Username</label>
-    <input type="text" th:field="*{username}"/>
-  </div>
-  <div>
-    <label>Password</label>
-    <input type="password" th:field="*{password}"/>
-  </div>
-  <div>
-    <button type="submit">Save</button>
-    <button type="submit">Cancel</button>
+    <form th:action="@{/register/save}" method="post" th:object="${appUser}">
+      <input type="hidden" th:field="*{Id}" />
+      <div>
+        <label>Email</label>
+        <input type="email" th:field="*{email}" required minlength="2" maxlength="45"/>
+      </div>
+      <div>
+        <label>Username</label>
+        <input type="text" th:field="*{username}"/>
+      </div>
+      <div>
+        <label>Password</label>
+        <input type="password" th:field="*{password}"/>
+      </div>
+      <div>
+        <button type="submit">Save</button>
+        <button type="submit">Cancel</button>
+      </div>
+    </form>
   </div>
 </body>
 </html>

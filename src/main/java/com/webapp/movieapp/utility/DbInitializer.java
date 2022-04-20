@@ -1,10 +1,10 @@
-package com.webapp.demo.utility;
+package com.webapp.movieapp.utility;
 
-import com.webapp.demo.models.movie.Movie;
-import com.webapp.demo.models.movie.MovieRepository;
-import com.webapp.demo.models.user.AppUser;
-import com.webapp.demo.models.user.UserRole;
-import com.webapp.demo.models.user.UserService;
+import com.webapp.movieapp.movie.Movie;
+import com.webapp.movieapp.movie.MovieRepository;
+import com.webapp.movieapp.user.AppUser;
+import com.webapp.movieapp.user.UserRole;
+import com.webapp.movieapp.user.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;

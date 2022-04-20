@@ -1,4 +1,4 @@
-package com.webapp.demo.models.movie;
+package com.webapp.movieapp.movie;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

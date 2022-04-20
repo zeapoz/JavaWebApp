@@ -1,4 +1,4 @@
-package com.webapp.demo.registration;
+package com.webapp.movieapp.registration;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;

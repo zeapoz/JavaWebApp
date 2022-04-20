@@ -1,6 +1,6 @@
-package com.webapp.demo.security.configuration;
+package com.webapp.movieapp.security.configuration;
 
-import com.webapp.demo.models.user.UserService;
+import com.webapp.movieapp.user.UserService;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

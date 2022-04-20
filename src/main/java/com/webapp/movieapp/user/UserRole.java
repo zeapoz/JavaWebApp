@@ -1,4 +1,4 @@
-package com.webapp.demo.models.user;
+package com.webapp.movieapp.user;
 
 public enum UserRole {
     ADMIN,

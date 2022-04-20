@@ -1,4 +1,4 @@
-package com.webapp.demo.security;
+package com.webapp.movieapp.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

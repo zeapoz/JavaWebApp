@@ -5,28 +5,32 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Movies</title>
+  <div th:replace="fragments/include"></div>
 </head>
 <body>
-  <h1>Movies</h1>
-  <table>
-    <thead>
-      <tr>
-        <th>Title</th>
-        <th>Description</th>
-        <th>Release Year</th>
-        <th>Price</th>
-      </tr>
-    </thead>
-    <tbody>
-      <th:block th:each="movie : ${movieList}">
+  <div th:replace="fragments/navbar"></div>
+  <div class="container-fluid">
+    <h1>Movies</h1>
+    <table>
+      <thead>
         <tr>
-          <td>[[${movie.title}]]</td>
-          <td>[[${movie.description}]]</td>
-          <td>[[${movie.releaseYear}]]</td>
-          <td>$[[${movie.price}]]</td>
+          <th>Title</th>
+          <th>Description</th>
+          <th>Release Year</th>
+          <th>Price</th>
         </tr>
-      </th:block>
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        <th:block th:each="movie : ${movieList}">
+          <tr>
+            <td>[[${movie.title}]]</td>
+            <td>[[${movie.description}]]</td>
+            <td>[[${movie.releaseYear}]]</td>
+            <td>$[[${movie.price}]]</td>
+          </tr>
+        </th:block>
+      </tbody>
+    </table>
+  </div>
 </body>
 </html>
