@@ -1,8 +1,8 @@
 package com.webapp.demo.registration;
 
-import com.webapp.demo.user.UserRole;
-import com.webapp.demo.user.AppUser;
-import com.webapp.demo.user.UserService;
+import com.webapp.demo.models.user.AppUser;
+import com.webapp.demo.models.user.UserRole;
+import com.webapp.demo.models.user.UserService;
 
 import org.springframework.stereotype.Service;
 

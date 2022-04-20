@@ -1,6 +1,6 @@
 package com.webapp.demo.security.configuration;
 
-import com.webapp.demo.user.UserService;
+import com.webapp.demo.models.user.UserService;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

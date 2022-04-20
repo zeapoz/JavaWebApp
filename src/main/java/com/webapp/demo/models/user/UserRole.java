@@ -1,4 +1,4 @@
-package com.webapp.demo.user;
+package com.webapp.demo.models.user;
 
 public enum UserRole {
     ADMIN,

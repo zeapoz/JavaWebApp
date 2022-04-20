@@ -1,6 +1,6 @@
 package com.webapp.demo.registration;
 
-import com.webapp.demo.user.AppUser;
+import com.webapp.demo.models.user.AppUser;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

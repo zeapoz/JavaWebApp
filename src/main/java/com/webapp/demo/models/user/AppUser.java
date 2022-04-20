@@ -1,4 +1,4 @@
-package com.webapp.demo.user;
+package com.webapp.demo.models.user;
 
 import java.util.Collection;
 import java.util.Collections;
