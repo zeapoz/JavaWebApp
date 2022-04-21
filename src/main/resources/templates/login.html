@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Register</title>
+  <title>Login</title>
   <div th:replace="fragments/include"></div>
 </head>
 <body class="bg-dark text-white">
@@ -12,23 +12,21 @@
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-md-4 mt-5 p-5 rounded shadow">
-        <h1 class="mb-3">Register</h1>
-        <form th:action="@{/register/save}" method="post" th:object="${appUser}">
-          <input type="hidden" th:field="*{Id}"/>
+        <h1 class="mb-3">Login</h1>
+        <form th:action="@{/login}" method="post">
+          <input type="hidden"/>
+          <div class="alert alert-danger" th:if="${(param.error)}">Invalid username or password</div>
+          <div class="alert alert-success" th:if="${(param.logout)}">Successfully logged out</div>
           <div class="mb-3">
             <label class="form-label">Email</label>
-            <input class="form-control" type="email" placeholder="name@example.com" th:field="*{email}" required minlength="2" maxlength="45"/>
-          </div>
-          <div class="mb-3">
-            <label class="form-label">Username</label>
-            <input class="form-control" type="text" th:field="*{username}" required/>
+            <input class="form-control" type="email" name="username" placeholder="name@example.com" required minlength="2" maxlength="45"/>
           </div>
           <div class="mb-3">
             <label class="form-label">Password</label>
-            <input class="form-control" type="password" th:field="*{password}" required/>
+            <input class="form-control" type="password" name="password" required/>
           </div>
           <div>
-            <button class="btn btn-primary" type="submit">Save</button>
+            <button class="btn btn-primary" type="submit">Submit</button>
           </div>
         </form>
       </div>

@@ -20,11 +20,6 @@ public class RegistrationController {
         return "register";
     }
 
-    @GetMapping("/login")
-    public String showLoginPage(Model model) {
-        return "login";
-    }
-
     @PostMapping("/register/save")
     public String saveUser(AppUser appUser) {
         registrationService.register(new RegistrationRequest(
