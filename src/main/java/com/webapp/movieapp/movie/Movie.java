@@ -19,12 +19,14 @@ public class Movie {
     private Long id;
     private String title;
     private String description;
+    private String imagePath;
     private int releaseYear;
     private double price;
 
-    public Movie(String title, String description, int releaseYear, double price) {
+    public Movie(String title, String description, String imagePath, int releaseYear, double price) {
         this.title = title;
         this.description = description;
+        this.imagePath = imagePath;
         this.releaseYear = releaseYear;
         this.price = price;
     }

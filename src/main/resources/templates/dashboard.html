@@ -12,22 +12,16 @@
   <div class="container">
     <h1 class="mb-3">What will you be watching today?</h1>
     <div class="row">
-      <div class="card col-3 p-0 m-2 bg-dark shadow">
-        <img class="card-img-top fit-image h-75" src="/images/cars.jpg" alt="Cars">
-        <div class="card-body">
-          <h5 class="card-title">Cars</h5>
-          <p class="card-text">Description of cars the movie</p>
-          <button class="btn btn-primary">Play</button>
+      <th:block th:each="movie : ${movieList}">
+        <div class="card col-3 p-0 m-3 bg-dark shadow">
+          <img class="card-img-top fit-image h-75" th:src="${movie.imagePath}" th:alt="${movie.title}">
+          <div class="card-body">
+            <h5 class="card-title">[[${movie.title}]]</h5>
+            <p class="card-text">[[${movie.description}]]</p>
+            <button class="btn btn-primary">Play</button>
+          </div>
         </div>
-      </div>
-      <div class="card col-3 p-0 m-2 bg-dark shadow">
-        <img class="card-img-top fit-image h-75" src="/images/sonic.jpg" alt="Sonic">
-        <div class="card-body">
-          <h5 class="card-title">Sonic the Hedgehog 2</h5>
-          <p class="card-text">Description of Sonic the movie</p>
-          <button class="btn btn-primary">Play</button>
-        </div>
-      </div>
+      </th:block>
     </div>
   </div>
 </body>
