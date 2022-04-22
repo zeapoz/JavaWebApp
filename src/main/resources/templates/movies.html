@@ -29,10 +29,15 @@
             <td><a th:href="${movie.imagePath}">[[${movie.imagePath}]]</a></td>
             <td>[[${movie.releaseYear}]]</td>
             <td>$[[${movie.price}]]</td>
+            <td>
+              <a th:href="@{'/movies/edit?id=' + ${movie.id}}">Edit</a>
+              <a th:href="@{'/movies/delete?id=' + ${movie.id}}">Delete</a>
+            </td>
           </tr>
         </th:block>
       </tbody>
     </table>
+    <a href="/movies/new">Create new</a>
   </div>
 </body>
 </html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Movies</title>
+  <div th:replace="fragments/include"></div>
+</head>
+<body class="bg-dark text-white">
+  <div th:replace="fragments/navbar"></div>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-4 mt-5 p-5 rounded shadow">
+        <h1 class="mb-3">Movie</h1>
+        <form th:action="@{/movies/save}" method="post" th:object="${movie}">
+          <input type="hidden" th:field="*{id}"/>
+          <div class="mb-3">
+            <label class="form-label">Title</label>
+            <input class="form-control" type="text" th:field="*{title}" required/>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Description</label>
+            <textarea class="form-control" rows="4" th:field="*{description}" required/>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Release Year</label>
+            <input class="form-control" type="number" th:field="*{releaseYear}" required/>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Price</label>
+            <input class="form-control" type="number" step="0.01" th:field="*{price}" required/>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Image Path</label>
+            <input class="form-control" type="text" th:field="*{imagePath}" required/>
+          </div>
+          <div>
+            <button class="btn btn-primary" type="submit">Save</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

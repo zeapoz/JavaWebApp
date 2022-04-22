@@ -22,4 +22,9 @@ public class DashboardController {
         model.addAttribute("movieList", movieList);
         return "dashboard";
     }
+
+    @GetMapping("/dashboard/play")
+    public String showPlayer(Model model) {
+        return "player";
+    }
 }
