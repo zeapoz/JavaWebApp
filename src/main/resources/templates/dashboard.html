@@ -14,9 +14,14 @@
     <div class="row">
       <th:block th:each="movie : ${movieList}">
         <div class="card col-3 p-0 m-3 bg-dark shadow">
-          <img class="card-img-top fit-image h-75" th:src="${movie.imagePath}" th:alt="${movie.title}">
+          <a class="h-75" th:href="@{'/movie?id=' + ${movie.id}}">
+            <img class="card-img-top fit-image" th:src="${movie.imagePath}" th:alt="${movie.title}">
+          </a>
           <div class="card-body">
-            <h5 class="card-title">[[${movie.title}]]</h5>
+            <div class="row justify-content-between">
+              <h5 class="col-6 card-title">[[${movie.title}]]</h5>
+              <div class="col-6 stars" th:style="|--rating: ${movie.userRating}|"></div>
+            </div>
             <p class="card-text">[[${movie.description}]]</p>
             <a class="btn btn-primary" href="/dashboard/play">Play</a>
           </div>

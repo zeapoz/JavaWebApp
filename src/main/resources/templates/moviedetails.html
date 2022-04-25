@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Movies</title>
+  <div th:replace="fragments/include"></div>
+</head>
+<body class="bg-dark text-white">
+  <div th:replace="fragments/navbar"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <img class="img-fluid rounded shadow" th:src="${movie.imagePath}" th:alt="${movie.title}">
+      </div>
+      <div class="col-md-6">
+        <div>
+          <h1>[[${movie.title}]]</h1>
+          <p>[[${movie.releaseYear}]]</p>
+          <p class="w-75">[[${movie.description}]]</p>
+        </div>
+        <button class="btn btn-success mb-5">Buy for $[[${movie.price}]]</button>
+        <div>
+          <div class="fs-4">
+            <div>
+              User rating:
+            <div class="stars" th:style="|--rating: ${movie.userRating}|"></div>
+          </div>
+          <div class="fs-4">
+            Critic rating:
+            <div class="stars" th:style="|--rating: ${movie.criticRating}|"></div>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

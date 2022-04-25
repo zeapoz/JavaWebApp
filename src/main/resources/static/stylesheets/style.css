@@ -2,3 +2,18 @@
   width: 100%;
   object-fit: cover;
 }
+
+.stars {
+  --percent: calc(var(--rating) / 5 * 100%);
+  display: inline-block;
+  text-align: right;
+  line-height: 1;
+}
+
+.stars::before {
+  content: '★★★★★';
+  letter-spacing: 3px;
+  background: linear-gradient(90deg, gold var(--percent), rgba(255, 255, 255, 0.5) var(--percent));
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

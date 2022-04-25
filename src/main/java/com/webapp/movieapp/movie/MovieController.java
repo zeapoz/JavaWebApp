@@ -15,6 +15,17 @@ public class MovieController {
     @Autowired
     private MovieService movieService;
 
+    @GetMapping("/movie")
+    public String showMovieDetails(@RequestParam Long id, Model model) {
+        try {
+            Movie movie = movieService.getMovieById(id);
+            model.addAttribute("movie", movie);
+            return "moviedetails";
+        } catch (MovieNotFoundException e) {
+            return "redirect:/movies";
+        }
+    }
+
     @GetMapping("/movies")
     public String showMovieList(Model model) {
         List<Movie> movieList = movieService.listAll();

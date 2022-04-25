@@ -22,12 +22,24 @@ public class Movie {
     private String imagePath;
     private int releaseYear;
     private double price;
+    private double criticRating;
+    private double userRating;
 
-    public Movie(String title, String description, String imagePath, int releaseYear, double price) {
+    public Movie(
+        String title,
+        String description,
+        String imagePath,
+        int releaseYear,
+        double price,
+        double criticRating,
+        double userRating
+    ) {
         this.title = title;
         this.description = description;
         this.imagePath = imagePath;
         this.releaseYear = releaseYear;
         this.price = price;
+        this.criticRating = criticRating;
+        this.userRating = userRating;
     }
 }
