@@ -1,5 +1,6 @@
 package com.webapp.movieapp.security.configuration;
 
+import com.webapp.movieapp.user.UserRole;
 import com.webapp.movieapp.user.UserService;
 
 import org.springframework.context.annotation.Bean;
@@ -31,11 +32,14 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 "/console/**" // For debug
             )
                 .permitAll()
+            .antMatchers(
+                "/movies/**"
+            ).hasRole(UserRole.ADMIN.toString())
                 .anyRequest().authenticated()
                 .and()
             .formLogin()
                 .loginPage("/login")
-                .defaultSuccessUrl("/dashboard")
+                .defaultSuccessUrl("/dashboard", true)
                 .permitAll()
                 .and()
             .logout()

@@ -26,7 +26,9 @@ public class DbInitializer implements CommandLineRunner {
 
     private void seedUsers() {
         AppUser admin = new AppUser("admin", "admin", "admin@localhost", UserRole.ADMIN);
+        AppUser user = new AppUser("user", "user", "user@localhost", UserRole.USER);
         userService.signUpUser(admin);
+        userService.signUpUser(user);
     }
     
     private void seedMovies() {
@@ -37,7 +39,8 @@ public class DbInitializer implements CommandLineRunner {
             2022,
             20.0,
             4.1,
-            4.3);
+            4.3
+        );
         createMovie(
             "Cars",
             "A hot-shot race-car named Lightning McQueen gets waylaid in Radiator Springs, where he finds the true meaning of friendship and family.",
@@ -45,7 +48,8 @@ public class DbInitializer implements CommandLineRunner {
             2006,
             24.0,
             4.1,
-            4.3);
+            4.3
+        );
         createMovie(
             "Shrek",
             "A mean lord exiles fairytale creatures to the swamp of a grumpy ogre, who must go on a quest and rescue a princess for the lord in order to get his land back.",
@@ -53,7 +57,8 @@ public class DbInitializer implements CommandLineRunner {
             2001,
             25.0,
             4.1,
-            4.3);
+            4.3
+        );
         createMovie(
             "Kung Fu Panda",
             "To everyone's surprise, including his own, Po, an overweight, clumsy panda, is chosen as protector of the Valley of Peace. His suitability will soon be tested as the valley's arch-enemy is on his way.",
@@ -61,7 +66,8 @@ public class DbInitializer implements CommandLineRunner {
             2008,
             19.0,
             4.1,
-            4.3);
+            4.3
+        );
         createMovie(
             "Despicable Me",
             "When a criminal mastermind uses a trio of orphan girls as pawns for a grand scheme, he finds their love is profoundly changing him for the better.",
@@ -69,7 +75,17 @@ public class DbInitializer implements CommandLineRunner {
             2010,
             21.0,
             4.1,
-            4.3);
+            4.3
+        );
+        createMovie(
+            "The Emoji Movie",
+            "Gene, a multi-expressional emoji, sets out on a journey to become a normal emoji.",
+            "emoji.jpg",
+            2017,
+            33.0,
+            5.0,
+            5.0
+        );
     }
 
     private void createMovie(
