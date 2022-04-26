@@ -34,7 +34,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .permitAll()
             .antMatchers(
                 "/movies/**"
-            ).hasRole(UserRole.ADMIN.toString())
+            ).hasAuthority(UserRole.ADMIN.name())
                 .anyRequest().authenticated()
                 .and()
             .formLogin()

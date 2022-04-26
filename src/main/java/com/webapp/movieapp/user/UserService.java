@@ -1,5 +1,8 @@
 package com.webapp.movieapp.user;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -23,6 +26,10 @@ public class UserService implements UserDetailsService {
             );
     }
 
+    public List<AppUser> listAll() {
+        return userRepository.findAll();
+    }
+
     public String signUpUser(AppUser appUser) {
         boolean userExists = userRepository.findByEmail(appUser.getEmail()).isPresent();
         if (userExists) {
@@ -34,5 +41,13 @@ public class UserService implements UserDetailsService {
         userRepository.save(appUser);
 
         return "This totally works.";
+    }
+
+    public void deleteUserById(Long id) throws UserNotFoundException {
+        Optional<AppUser> optionalUser = userRepository.findById(id);
+        if (optionalUser.isPresent()) {
+            userRepository.deleteById(id);
+        }
+        throw new UserNotFoundException("No movie found with id " + id);
     }
 }
