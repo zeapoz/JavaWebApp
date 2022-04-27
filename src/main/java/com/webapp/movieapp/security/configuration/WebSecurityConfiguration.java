@@ -28,12 +28,13 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
             .authorizeRequests()
             .antMatchers(
                 "/",
-                "/register/**",
-                "/console/**" // For debug
+                "/register/**"
             )
                 .permitAll()
             .antMatchers(
-                "/movies/**"
+                "/movies/**",
+                "/users/**",
+                "/console/**" // For debug
             ).hasAuthority(UserRole.ADMIN.name())
                 .anyRequest().authenticated()
                 .and()
