@@ -29,8 +29,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
             .antMatchers(
                 "/",
                 "/register/**"
-            )
-                .permitAll()
+            ).permitAll()
             .antMatchers(
                 "/movies/**",
                 "/users/**",

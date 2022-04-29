@@ -1,5 +1,7 @@
 package com.webapp.movieapp.utility;
 
+import java.util.Collections;
+
 import com.webapp.movieapp.movie.Movie;
 import com.webapp.movieapp.movie.MovieRepository;
 import com.webapp.movieapp.user.AppUser;
@@ -20,13 +22,20 @@ public class DbInitializer implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        seedUsers();
         seedMovies();
+        seedUsers();
     }
 
     private void seedUsers() {
         AppUser admin = new AppUser("admin", "admin", "admin@localhost", UserRole.ADMIN);
         AppUser user = new AppUser("user", "user", "user@localhost", UserRole.USER);
+
+        Movie test = new Movie();
+        test.setTitle("Test");
+        test.setDescription("This is a test movie");
+        movieRepository.save(test);
+
+        user.setMovies(Collections.singletonList(test));
         userService.signUpUser(admin);
         userService.signUpUser(user);
     }

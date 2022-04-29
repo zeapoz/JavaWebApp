@@ -10,7 +10,12 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+
+import com.webapp.movieapp.movie.Movie;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -46,6 +51,10 @@ public class AppUser implements UserDetails {
     private boolean locked;
     @Column
     private boolean enabled;
+
+    @ManyToMany
+    @JoinTable(name = "movie_licenses", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "movie_id", referencedColumnName = "id"))
+    private Collection<Movie> movies;
 
     public AppUser(String username, String password, String email, UserRole userRole) {
         this.username = username;

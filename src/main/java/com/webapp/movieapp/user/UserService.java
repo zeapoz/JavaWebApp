@@ -1,7 +1,10 @@
 package com.webapp.movieapp.user;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
+
+import com.webapp.movieapp.movie.Movie;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -28,6 +31,11 @@ public class UserService implements UserDetailsService {
 
     public List<AppUser> listAll() {
         return userRepository.findAll();
+    }
+
+    public Collection<Movie> getUserMovies(String username) {
+        AppUser user = (AppUser) loadUserByUsername(username);
+        return user.getMovies();
     }
 
     public String signUpUser(AppUser appUser) {
