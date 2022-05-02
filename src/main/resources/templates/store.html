@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Store</title>
+  <div th:replace="fragments/include"></div>
+</head>
+<body class="bg-dark text-white">
+  <div th:replace="fragments/navbar"></div>
+  <div class="container">
+    <h1 class="mb-3 mt-5">What will you be watching today?</h1>
+    <div class="row">
+      <th:block th:each="movie : ${movieList}">
+        <div class="card col-3 p-0 m-3 bg-dark shadow">
+          <a class="h-75" th:href="@{'/movie?id=' + ${movie.id}}">
+            <img class="card-img-top fit-image" th:src="${movie.imagePath}" th:alt="${movie.title}">
+          </a>
+          <div class="card-body">
+            <div class="row justify-content-between">
+              <h5 class="col-6 card-title">[[${movie.title}]]</h5>
+              <div class="col-6 stars" th:style="|--rating: ${movie.userRating}|"></div>
+            </div>
+            <p class="card-text">[[${movie.description}]]</p>
+            <a class="btn btn-primary" href="">Buy $[[${movie.price}]]</a>
+          </div>
+        </div>
+      </th:block>
+    </div>
+  </div>
+</body>
+</html>
