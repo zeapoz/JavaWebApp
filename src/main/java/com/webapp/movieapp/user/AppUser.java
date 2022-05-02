@@ -51,6 +51,8 @@ public class AppUser implements UserDetails {
     private boolean locked;
     @Column
     private boolean enabled;
+    @Column
+    private double credits;
 
     @ManyToMany
     @JoinTable(name = "movie_licenses", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "movie_id", referencedColumnName = "id"))
@@ -62,6 +64,7 @@ public class AppUser implements UserDetails {
         this.email = email;
         this.userRole = userRole;
         expired = false; locked = false; enabled = true;
+        credits = 100.0;
     }
 
     @Override

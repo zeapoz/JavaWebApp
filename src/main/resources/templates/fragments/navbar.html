@@ -2,7 +2,7 @@
   <div class="container">
     <ul class="navbar-nav">
       <a class="navbar-brand fw-bold" href="">MovieApp</a>
-      <li class="nav-item">
+      <li sec:authorize="isAnonymous()" class="nav-item">
         <a class="nav-link" href="/">Home</a>
       </li>
       <li sec:authorize="isAuthenticated()" class="nav-item">
@@ -11,7 +11,7 @@
       <li sec:authorize="isAuthenticated()" class="nav-item">
         <a class="nav-link" href="/store">Store</a>
       </li>
-      <li sec:authorize="isAuthenticated()" class="nav-item dropdown">
+      <li sec:authorize="isAuthenticated()" th:if="${#authentication.getPrincipal().getUserRole() == ADMIN}" class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Admin controls</a>
         <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown">
           <li><a class="dropdown-item" href="/movies">Movies</a></li>
@@ -28,6 +28,11 @@
       <li sec:authorize="isAnonymous()" class="nav-item">
         <a class="nav-link" href="/login">
           <i class="bi bi-box-arrow-in-right"></i> Login
+        </a>
+      </li>
+      <li sec:authorize="isAuthenticated()" class="nav-item">
+        <a class="nav-link" href="">
+          Credits: $<span th:text="${#authentication.getPrincipal().getCredits()}"></span>
         </a>
       </li>
       <li sec:authorize="isAuthenticated()" class="nav-item">
