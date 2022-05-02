@@ -9,9 +9,10 @@
 </head>
 <body class="bg-dark text-white">
   <div th:replace="fragments/navbar"></div>
-  <div class="container">
+  <div th:replace="fragments/posters"></div>
+  <div class="container mt-5">
     <div class="row justify-content-center">
-      <div class="col-md-5 mt-5 p-5 rounded shadow">
+      <div class="col-md-5 bg-dark mt-5 p-5 rounded shadow">
         <h1 class="mb-3">Login</h1>
         <form th:action="@{/login}" method="post">
           <input type="hidden"/>

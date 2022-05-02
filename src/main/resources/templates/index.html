@@ -4,14 +4,24 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Home</title>
+  <title>MovieApp - Home</title>
   <div th:replace="fragments/include"></div>
 </head>
 <body class="bg-dark text-white">
   <div th:replace="fragments/navbar"></div>
-  <div class="container">
-    <p>Hello, world!</p>
-    <a href="/movies">View movies</a>
+  <div th:replace="fragments/posters"></div>
+  <div class="container-fluid mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-4 mt-5 p-5 bg-dark rounded shadow-lg">
+        <h1 class="fw-bold">MovieApp</h1>
+        <p>The only <span class="fw-bold">relevant</span> streaming platform.</p>
+        <p>Sign up today and recieve an additional movie at no extra cost!</p>
+        <div class="row justify-content-around">
+          <a class="btn btn-primary col-5" href="login">Login</a>
+          <a class="btn btn-primary col-5" href="register">Register</a>
+        </div>
+      </div>
+    </div>
   </div>
 </body>
 </html>

@@ -3,6 +3,10 @@
   object-fit: cover;
 }
 
+.img-bg {
+  z-index: -1;
+}
+
 .stars {
   --percent: calc(var(--rating) / 5 * 100%);
   display: inline-block;
