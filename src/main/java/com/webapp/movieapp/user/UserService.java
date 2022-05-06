@@ -56,6 +56,6 @@ public class UserService implements UserDetailsService {
         if (optionalUser.isPresent()) {
             userRepository.deleteById(id);
         }
-        throw new UserNotFoundException("No movie found with id " + id);
+        throw new UserNotFoundException("No user found with id " + id);
     }
 }

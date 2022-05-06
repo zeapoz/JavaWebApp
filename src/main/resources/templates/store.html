@@ -23,7 +23,7 @@
               <div class="col-6 stars" th:style="|--rating: ${movie.userRating}|"></div>
             </div>
             <p class="card-text">[[${movie.description}]]</p>
-            <a class="btn btn-danger" href="">Buy $[[${movie.price}]]</a>
+            <a class="btn btn-danger" th:href="@{'/store/buy?id=' + ${movie.id}}">Buy $[[${movie.price}]]</a>
           </div>
         </div>
       </th:block>
