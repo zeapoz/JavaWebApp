@@ -6,7 +6,6 @@ import com.webapp.movieapp.movie.Movie;
 import com.webapp.movieapp.movie.MovieNotFoundException;
 import com.webapp.movieapp.movie.MovieService;
 import com.webapp.movieapp.user.AppUser;
-import com.webapp.movieapp.user.UserRepository;
 import com.webapp.movieapp.user.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +22,6 @@ public class StoreController {
     private MovieService movieService;
     @Autowired
     private UserService userService;
-    @Autowired
-    private UserRepository userRepository;
     
     @GetMapping("/store")
     public String showStore(Model model, @AuthenticationPrincipal AppUser user) {
@@ -39,12 +36,10 @@ public class StoreController {
     public String buyMovie(@RequestParam Long id, @AuthenticationPrincipal AppUser user) {
         try {
             Movie movie = movieService.getMovieById(id);
-            List<Movie> movies = movieService.listAll();
-            user.setMovies(movies);
-            userRepository.save(user);
+            userService.AddUserMovie(user, movie);
         } catch (MovieNotFoundException e) {
             e.printStackTrace();
         }
-        return "store";
+        return "redirect:/store";
     }
 }

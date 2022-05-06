@@ -1,6 +1,7 @@
 package com.webapp.movieapp.user;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,6 +37,14 @@ public class UserService implements UserDetailsService {
     public Collection<Movie> getUserMovies(String username) {
         AppUser user = (AppUser) loadUserByUsername(username);
         return user.getMovies();
+    }
+
+    public void AddUserMovie(AppUser appUser, Movie movie) {
+        // TODO check if credits are valid
+        appUser.setCredits(appUser.getCredits() - movie.getPrice());
+        Collection<Movie> movies = Collections.singletonList(movie);
+        appUser.setMovies(movies);
+        userRepository.save(appUser);
     }
 
     public String signUpUser(AppUser appUser) {
