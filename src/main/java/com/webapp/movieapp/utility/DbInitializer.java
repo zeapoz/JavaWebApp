@@ -30,6 +30,9 @@ public class DbInitializer implements CommandLineRunner {
         AppUser admin = new AppUser("admin", "admin", "admin@localhost", UserRole.ADMIN);
         AppUser user = new AppUser("user", "user", "user@localhost", UserRole.USER);
 
+        admin.setEnabled(true);
+        user.setEnabled(true);
+
         Movie test = new Movie();
         test.setTitle("Test");
         test.setDescription("This is a test movie");

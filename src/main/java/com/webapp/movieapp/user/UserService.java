@@ -26,7 +26,6 @@ public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final ConfirmationTokenService confirmationTokenService;
-    private ConfirmationToken confirmationToken;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -66,7 +65,7 @@ public class UserService implements UserDetailsService {
         // Create confirmation token
         String token = UUID.randomUUID().toString();
 
-        this.confirmationToken = new ConfirmationToken(
+        ConfirmationToken confirmationToken = new ConfirmationToken(
             token,
             LocalDateTime.now(),
             LocalDateTime.now().plusMinutes(15),
@@ -77,6 +76,10 @@ public class UserService implements UserDetailsService {
         confirmationTokenService.saveConfirmationToken(confirmationToken);
 
         return "This totally works.";
+    }
+
+    public int enableUser(String email) {
+        return userRepository.enableUser(email);
     }
 
     public void deleteUserById(Long id) throws UserNotFoundException {

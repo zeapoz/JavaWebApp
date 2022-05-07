@@ -63,7 +63,7 @@ public class AppUser implements UserDetails {
         this.password = password;
         this.email = email;
         this.userRole = userRole;
-        expired = false; locked = false; enabled = true;
+        expired = false; locked = false; enabled = false;
         credits = 100.0;
     }
 
