@@ -75,7 +75,7 @@ public class UserService implements UserDetailsService {
 
         confirmationTokenService.saveConfirmationToken(confirmationToken);
 
-        return "This totally works.";
+        return confirmationToken.getToken();
     }
 
     public int enableUser(String email) {
