@@ -11,6 +11,7 @@
   <div th:replace="fragments/navbar"></div>
   <div class="container">
     <h1 class="mb-3 mt-5">Browse the top-rated movies here</h1>
+    <div class="alert alert-danger" th:if="${(param.error)}">An error ocurred. Movie not found or you do not have sufficient credits.</div>
     <div class="row">
       <th:block th:each="movie : ${movieList}">
         <div class="card col-3 p-0 m-3 bg-dark shadow">

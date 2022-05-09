@@ -37,8 +37,8 @@ public class StoreController {
         try {
             Movie movie = movieService.getMovieById(id);
             userService.AddUserMovie(user, movie);
-        } catch (MovieNotFoundException e) {
-            e.printStackTrace();
+        } catch (NotEnoughCreditsExeption | MovieNotFoundException e) {
+            return "redirect:/store?error";
         }
         return "redirect:/store";
     }

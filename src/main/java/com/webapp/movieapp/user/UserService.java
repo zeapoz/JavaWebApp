@@ -1,7 +1,6 @@
 package com.webapp.movieapp.user;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
@@ -10,6 +9,7 @@ import java.util.UUID;
 import com.webapp.movieapp.movie.Movie;
 import com.webapp.movieapp.registration.token.ConfirmationToken;
 import com.webapp.movieapp.registration.token.ConfirmationTokenService;
+import com.webapp.movieapp.store.NotEnoughCreditsExeption;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -47,11 +47,15 @@ public class UserService implements UserDetailsService {
     }
 
     @Transactional(propagation=Propagation.REQUIRED, readOnly=false, noRollbackFor=Exception.class)
-    public void AddUserMovie(AppUser appUser, Movie movie) {
-        // TODO check if credits are valid
+    public void AddUserMovie(AppUser appUser, Movie movie) throws NotEnoughCreditsExeption {
+        // Validate credits
+        if (appUser.getCredits() < movie.getPrice()) {
+            throw new NotEnoughCreditsExeption("not enough credits");
+        }
         appUser.setCredits(appUser.getCredits() - movie.getPrice());
-        ArrayList<Movie> movies = new ArrayList<Movie>();
-        movies.addAll(appUser.getMovies());
+
+        // Add new movie to user movies
+        Collection<Movie> movies = appUser.getMovies();
         movies.add(movie);
         appUser.setMovies(movies);
         userRepository.save(appUser);
