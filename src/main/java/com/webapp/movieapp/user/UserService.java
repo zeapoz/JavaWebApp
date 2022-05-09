@@ -1,8 +1,8 @@
 package com.webapp.movieapp.user;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -16,6 +16,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import lombok.AllArgsConstructor;
 
@@ -44,10 +46,13 @@ public class UserService implements UserDetailsService {
         return user.getMovies();
     }
 
+    @Transactional(propagation=Propagation.REQUIRED, readOnly=false, noRollbackFor=Exception.class)
     public void AddUserMovie(AppUser appUser, Movie movie) {
         // TODO check if credits are valid
         appUser.setCredits(appUser.getCredits() - movie.getPrice());
-        Collection<Movie> movies = Collections.singletonList(movie);
+        ArrayList<Movie> movies = new ArrayList<Movie>();
+        movies.addAll(appUser.getMovies());
+        movies.add(movie);
         appUser.setMovies(movies);
         userRepository.save(appUser);
     }
@@ -70,7 +75,6 @@ public class UserService implements UserDetailsService {
             LocalDateTime.now(),
             LocalDateTime.now().plusMinutes(15),
             appUser
-
         );
 
         confirmationTokenService.saveConfirmationToken(confirmationToken);

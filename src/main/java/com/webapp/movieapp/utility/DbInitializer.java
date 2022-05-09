@@ -1,7 +1,5 @@
 package com.webapp.movieapp.utility;
 
-import java.util.Collections;
-
 import com.webapp.movieapp.movie.Movie;
 import com.webapp.movieapp.movie.MovieRepository;
 import com.webapp.movieapp.user.AppUser;
@@ -33,12 +31,6 @@ public class DbInitializer implements CommandLineRunner {
         admin.setEnabled(true);
         user.setEnabled(true);
 
-        Movie test = new Movie();
-        test.setTitle("Test");
-        test.setDescription("This is a test movie");
-        movieRepository.save(test);
-
-        user.setMovies(Collections.singletonList(test));
         userService.signUpUser(admin);
         userService.signUpUser(user);
     }

@@ -1,5 +1,6 @@
 package com.webapp.movieapp.user;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 
@@ -7,6 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -54,7 +56,7 @@ public class AppUser implements UserDetails {
     @Column
     private double credits;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "movie_licenses", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "movie_id", referencedColumnName = "id"))
     private Collection<Movie> movies;
 
@@ -65,6 +67,7 @@ public class AppUser implements UserDetails {
         this.userRole = userRole;
         expired = false; locked = false; enabled = false;
         credits = 100.0;
+        movies = new ArrayList<Movie>();
     }
 
     @Override
