@@ -22,7 +22,7 @@ public class StoreController {
     private MovieService movieService;
     @Autowired
     private UserService userService;
-    
+
     @GetMapping("/store")
     public String showStore(Model model, @AuthenticationPrincipal AppUser user) {
         List<Movie> movieList = movieService.listAll();
@@ -37,7 +37,7 @@ public class StoreController {
         try {
             Movie movie = movieService.getMovieById(id);
             userService.AddUserMovie(user, movie);
-        } catch (NotEnoughCreditsExeption | MovieNotFoundException e) {
+        } catch (NotEnoughCreditsException | MovieNotFoundException e) {
             return "redirect:/store?error";
         }
         return "redirect:/store";

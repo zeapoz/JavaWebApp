@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -15,9 +16,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.webapp.movieapp.movie.Movie;
+import com.webapp.movieapp.registration.token.ConfirmationToken;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -33,7 +36,7 @@ import lombok.Setter;
 @EqualsAndHashCode
 @NoArgsConstructor
 @Entity
-@Table(name="users")
+@Table(name = "users")
 public class AppUser implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -56,7 +59,11 @@ public class AppUser implements UserDetails {
     @Column
     private double credits;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.REMOVE)
+    @JoinColumn(name = "user_id")
+    private Collection<ConfirmationToken> tokens;
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     @JoinTable(name = "movie_licenses", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "movie_id", referencedColumnName = "id"))
     private Collection<Movie> movies;
 
@@ -65,7 +72,9 @@ public class AppUser implements UserDetails {
         this.password = password;
         this.email = email;
         this.userRole = userRole;
-        expired = false; locked = false; enabled = false;
+        expired = false;
+        locked = false;
+        enabled = false;
         credits = 100.0;
         movies = new ArrayList<Movie>();
     }

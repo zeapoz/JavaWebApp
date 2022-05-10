@@ -2,6 +2,7 @@ package com.webapp.movieapp.registration.token;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,7 +24,7 @@ import lombok.Setter;
 @Entity
 @Table(name = "confirmation_token")
 public class ConfirmationToken {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -36,19 +37,15 @@ public class ConfirmationToken {
     @Column
     private LocalDateTime confirmedAt;
 
-    @ManyToOne
-    @JoinColumn(
-        nullable = false,
-        name = "user_id"
-    )
+    @ManyToOne(cascade = CascadeType.REMOVE)
+    @JoinColumn(nullable = true, name = "user_id")
     private AppUser user;
 
     public ConfirmationToken(
-        String token,
-        LocalDateTime createdAt,
-        LocalDateTime expiresAt,
-        AppUser user
-    ) {
+            String token,
+            LocalDateTime createdAt,
+            LocalDateTime expiresAt,
+            AppUser user) {
         this.token = token;
         this.createdAt = createdAt;
         this.expiresAt = expiresAt;

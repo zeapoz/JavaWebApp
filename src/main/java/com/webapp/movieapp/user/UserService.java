@@ -9,7 +9,7 @@ import java.util.UUID;
 import com.webapp.movieapp.movie.Movie;
 import com.webapp.movieapp.registration.token.ConfirmationToken;
 import com.webapp.movieapp.registration.token.ConfirmationTokenService;
-import com.webapp.movieapp.store.NotEnoughCreditsExeption;
+import com.webapp.movieapp.store.NotEnoughCreditsException;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -32,9 +32,8 @@ public class UserService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return userRepository.findByEmail(username)
-            .orElseThrow(
-                () -> new UsernameNotFoundException("No such email.")
-            );
+                .orElseThrow(
+                        () -> new UsernameNotFoundException("No such email."));
     }
 
     public List<AppUser> listAll() {
@@ -46,18 +45,16 @@ public class UserService implements UserDetailsService {
         return user.getMovies();
     }
 
-    @Transactional(propagation=Propagation.REQUIRED, readOnly=false, noRollbackFor=Exception.class)
-    public void AddUserMovie(AppUser appUser, Movie movie) throws NotEnoughCreditsExeption {
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = false, noRollbackFor = Exception.class)
+    public void AddUserMovie(AppUser appUser, Movie movie) throws NotEnoughCreditsException {
         // Validate credits
         if (appUser.getCredits() < movie.getPrice()) {
-            throw new NotEnoughCreditsExeption("not enough credits");
+            throw new NotEnoughCreditsException("not enough credits");
         }
         appUser.setCredits(appUser.getCredits() - movie.getPrice());
 
         // Add new movie to user movies
-        Collection<Movie> movies = appUser.getMovies();
-        movies.add(movie);
-        appUser.setMovies(movies);
+        appUser.getMovies().add(movie);
         userRepository.save(appUser);
     }
 
@@ -75,11 +72,10 @@ public class UserService implements UserDetailsService {
         String token = UUID.randomUUID().toString();
 
         ConfirmationToken confirmationToken = new ConfirmationToken(
-            token,
-            LocalDateTime.now(),
-            LocalDateTime.now().plusMinutes(15),
-            appUser
-        );
+                token,
+                LocalDateTime.now(),
+                LocalDateTime.now().plusMinutes(15),
+                appUser);
 
         confirmationTokenService.saveConfirmationToken(confirmationToken);
 

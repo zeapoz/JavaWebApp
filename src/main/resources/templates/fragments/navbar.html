@@ -11,11 +11,14 @@
       <li sec:authorize="isAuthenticated()" class="nav-item">
         <a class="nav-link" href="/store">Store</a>
       </li>
-      <li sec:authorize="isAuthenticated()" th:if="${#authentication.getPrincipal().getUserRole() == ADMIN}" class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Admin controls</a>
+      <li sec:authorize="isAuthenticated()"
+        th:if="${#authentication.getPrincipal().getUserRole().toString() == 'ADMIN'}" class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+          aria-expanded="false">Admin controls</a>
         <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown">
           <li><a class="dropdown-item" href="/movies">Movies</a></li>
           <li><a class="dropdown-item" href="/users">Users</a></li>
+          <li><a class="dropdown-item" href="/licenses">Licenses</a></li>
         </ul>
       </li>
     </ul>
