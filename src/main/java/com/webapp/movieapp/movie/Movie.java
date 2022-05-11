@@ -2,7 +2,6 @@ package com.webapp.movieapp.movie;
 
 import java.util.Collection;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -31,7 +30,7 @@ public class Movie {
     private double criticRating;
     private double userRating;
 
-    @ManyToMany(mappedBy = "movies", cascade = CascadeType.REMOVE)
+    @ManyToMany(mappedBy = "movies")
     private Collection<AppUser> users;
 
     public Movie(

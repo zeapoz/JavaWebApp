@@ -6,6 +6,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceUnit;
+
 import com.webapp.movieapp.movie.Movie;
 import com.webapp.movieapp.registration.token.ConfirmationToken;
 import com.webapp.movieapp.registration.token.ConfirmationTokenService;
@@ -28,6 +32,9 @@ public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final ConfirmationTokenService confirmationTokenService;
+
+    @PersistenceUnit
+    private EntityManagerFactory entityManagerFactory;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -89,8 +96,18 @@ public class UserService implements UserDetailsService {
     public void deleteUserById(Long id) throws UserNotFoundException {
         Optional<AppUser> optionalUser = userRepository.findById(id);
         if (optionalUser.isPresent()) {
-            userRepository.deleteById(id);
+            // userRepository.deleteById(id);
+            EntityManager em = entityManagerFactory.createEntityManager();
+            em.getTransaction().begin();
+
+            AppUser u = em.find(AppUser.class, id);
+            for (Movie movie : u.getMovies()) {
+                movie.getUsers().remove(u);
+            }
+            em.remove(u);
+            em.getTransaction().commit();
+        } else {
+            throw new UserNotFoundException("No user found with id " + id);
         }
-        throw new UserNotFoundException("No user found with id " + id);
     }
 }
