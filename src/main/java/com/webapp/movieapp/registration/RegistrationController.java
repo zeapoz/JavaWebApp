@@ -24,10 +24,10 @@ public class RegistrationController {
     @PostMapping("/register/save")
     public String saveUser(AppUser appUser) {
         registrationService.register(new RegistrationRequest(
-            appUser.getUsername(),
-            appUser.getPassword(),
-            appUser.getEmail()));
-        return "redirect:/";
+                appUser.getUsername(),
+                appUser.getPassword(),
+                appUser.getEmail()));
+        return "redirect:/register?confirm";
     }
 
     @GetMapping("register/confirm")

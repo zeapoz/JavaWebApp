@@ -24,10 +24,9 @@ public class RegistrationService {
 
     public String confirmToken(String token) {
         ConfirmationToken confirmationToken = confirmationTokenService
-            .getToken(token)
-            .orElseThrow(
-                () -> new IllegalStateException("token not found")
-            );
+                .getToken(token)
+                .orElseThrow(
+                        () -> new IllegalStateException("token not found"));
         if (confirmationToken.getConfirmedAt() != null) {
             throw new IllegalStateException("email already confirmed");
         }
@@ -39,8 +38,7 @@ public class RegistrationService {
 
         confirmationTokenService.setConfirmedAt(token);
         userService.enableUser(
-            confirmationToken.getUser().getEmail()
-        );
+                confirmationToken.getUser().getEmail());
 
         return "confirmed";
     }
@@ -52,13 +50,11 @@ public class RegistrationService {
         }
 
         String token = userService.signUpUser(
-            new AppUser(
-                request.getUsername(),
-                request.getPassword(),
-                request.getEmail(),
-                UserRole.USER
-            )
-        );
+                new AppUser(
+                        request.getUsername(),
+                        request.getPassword(),
+                        request.getEmail(),
+                        UserRole.USER));
         String link = "http://localhost:8080/register/confirm?token=" + token;
         emailSender.send(request.getEmail(), buildEmail(request.getUsername(), link));
 
@@ -66,9 +62,9 @@ public class RegistrationService {
     }
 
     public String buildEmail(String name, String link) {
-        return "<p>Hi" + name + ",</p>" + 
-            "<p>Thank you for registering. Please click the link below to activate your account!</p>" +
-            "<p><a href=\"" + link + "\">" + link + "</a></p>" + 
-            "<p>The link will expire in 15 minutes.</p>";
+        return "<p>Hi " + name + ",</p>" +
+                "<p>Thank you for registering. Please click the link below to activate your account!</p>" +
+                "<p><a href=\"" + link + "\">" + link + "</a></p>" +
+                "<p>The link will expire in 15 minutes.</p>";
     }
 }

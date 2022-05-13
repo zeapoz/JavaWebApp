@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,6 +8,7 @@
   <title>Register</title>
   <div th:replace="fragments/include"></div>
 </head>
+
 <body class="bg-dark text-white">
   <div th:replace="fragments/navbar"></div>
   <div th:replace="fragments/posters"></div>
@@ -15,18 +17,21 @@
       <div class="col-md-5 mt-5 p-5 bg-dark rounded shadow">
         <h1 class="mb-3">Register</h1>
         <form th:action="@{/register/save}" method="post" th:object="${appUser}">
-          <input type="hidden" th:field="*{id}"/>
+          <div class="alert alert-info" th:if="${(param.confirm)}">Thanks for registering an account on MovieWebApp.
+            Please confirm your email before loggin in.</div>
+          <input type="hidden" th:field="*{id}" />
           <div class="mb-3">
             <label class="form-label">Email</label>
-            <input class="form-control" type="email" placeholder="name@example.com" th:field="*{email}" required minlength="2" maxlength="45"/>
+            <input class="form-control" type="email" placeholder="name@example.com" th:field="*{email}" required
+              minlength="2" maxlength="45" />
           </div>
           <div class="mb-3">
             <label class="form-label">Username</label>
-            <input class="form-control" type="text" th:field="*{username}" required/>
+            <input class="form-control" type="text" th:field="*{username}" required />
           </div>
           <div class="mb-3">
             <label class="form-label">Password</label>
-            <input class="form-control" type="password" th:field="*{password}" required/>
+            <input class="form-control" type="password" th:field="*{password}" required />
           </div>
           <div>
             <button class="btn btn-primary" type="submit">Save</button>
@@ -36,4 +41,5 @@
     </div>
   </div>
 </body>
+
 </html>

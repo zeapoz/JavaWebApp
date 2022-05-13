@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Confirmed</title>
+  <div th:replace="fragments/include"></div>
+</head>
+
+<body class="bg-dark text-white">
+  <div th:replace="fragments/navbar"></div>
+  <div class="container">
+    <p class="mb-3 mt-5">You're email was <span class="text-success">successfully confirmed.</span> Please login <a
+        href="/login">here</a> to start using
+      MovieWebApp</p>
+  </div>
+</body>
+
+</html>
