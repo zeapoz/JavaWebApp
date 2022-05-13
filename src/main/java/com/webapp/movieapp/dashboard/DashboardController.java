@@ -1,6 +1,6 @@
 package com.webapp.movieapp.dashboard;
 
-import java.util.List;
+import java.util.Set;
 
 import com.webapp.movieapp.movie.Movie;
 import com.webapp.movieapp.user.AppUser;
@@ -17,10 +17,10 @@ public class DashboardController {
 
     @Autowired
     private UserService userService;
-    
+
     @GetMapping("/dashboard")
     public String showDashboard(Model model, @AuthenticationPrincipal AppUser user) {
-        List<Movie> movieList = (List<Movie>) userService.getUserMovies(user.getEmail());
+        Set<Movie> movieList = userService.getUserMovies(user.getEmail());
         model.addAttribute("movieList", movieList);
         return "dashboard";
     }

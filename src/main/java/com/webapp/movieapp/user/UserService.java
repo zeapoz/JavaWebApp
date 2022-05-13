@@ -1,9 +1,10 @@
 package com.webapp.movieapp.user;
 
 import java.time.LocalDateTime;
-import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.UUID;
 
 import javax.persistence.EntityManager;
@@ -47,7 +48,7 @@ public class UserService implements UserDetailsService {
         return userRepository.findAll();
     }
 
-    public Collection<Movie> getUserMovies(String username) {
+    public Set<Movie> getUserMovies(String username) {
         AppUser user = (AppUser) loadUserByUsername(username);
         return user.getMovies();
     }
@@ -61,7 +62,10 @@ public class UserService implements UserDetailsService {
         appUser.setCredits(appUser.getCredits() - movie.getPrice());
 
         // Add new movie to user movies
-        appUser.getMovies().add(movie);
+        Set<Movie> movies = new HashSet<>(appUser.getMovies());
+        movies.add(movie);
+        appUser.getMovies().clear();
+        appUser.setMovies(movies);
         userRepository.save(appUser);
     }
 

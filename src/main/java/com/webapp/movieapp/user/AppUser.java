@@ -1,8 +1,9 @@
 package com.webapp.movieapp.user;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -65,7 +66,7 @@ public class AppUser implements UserDetails {
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "movie_licenses", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "movie_id", referencedColumnName = "id"))
-    private Collection<Movie> movies;
+    private Set<Movie> movies;
 
     public AppUser(String username, String password, String email, UserRole userRole) {
         this.username = username;
@@ -76,7 +77,7 @@ public class AppUser implements UserDetails {
         locked = false;
         enabled = false;
         credits = 100.0;
-        movies = new ArrayList<Movie>();
+        movies = new HashSet<Movie>();
     }
 
     @Override
