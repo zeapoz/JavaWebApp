@@ -21,8 +21,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 
 import lombok.AllArgsConstructor;
 
@@ -53,7 +51,6 @@ public class UserService implements UserDetailsService {
         return user.getMovies();
     }
 
-    @Transactional(propagation = Propagation.REQUIRED, readOnly = false, noRollbackFor = Exception.class)
     public void AddUserMovie(AppUser appUser, Movie movie) throws NotEnoughCreditsException {
         // Validate credits
         if (appUser.getCredits() < movie.getPrice()) {

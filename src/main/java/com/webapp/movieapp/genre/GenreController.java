@@ -46,7 +46,7 @@ public class GenreController {
         } catch (GenreNotFoundException e) {
             e.printStackTrace();
         }
-        return "redirect:/genres";
+        return "redirect:/login?logout";
     }
 
     @PostMapping("/genres/save")

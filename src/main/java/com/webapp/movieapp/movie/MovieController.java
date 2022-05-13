@@ -57,7 +57,7 @@ public class MovieController {
         } catch (MovieNotFoundException e) {
             e.printStackTrace();
         }
-        return "redirect:/movies";
+        return "redirect:/login?logout";
     }
 
     @PostMapping("/movies/save")

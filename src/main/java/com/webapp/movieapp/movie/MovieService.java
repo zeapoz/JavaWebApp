@@ -43,12 +43,18 @@ public class MovieService {
             EntityManager em = entityManagerFactory.createEntityManager();
             em.getTransaction().begin();
 
-            Movie m = em.find(Movie.class, id);
-            for (AppUser user : m.getUsers()) {
-                user.getMovies().remove(m);
+            try {
+                Movie m = em.find(Movie.class, id);
+                for (AppUser user : m.getUsers()) {
+                    user.getMovies().remove(m);
+                }
+                em.remove(m);
+                em.getTransaction().commit();
+                em.flush();
+                em.clear();
+            } catch (Exception e) {
+                return;
             }
-            em.remove(m);
-            em.getTransaction().commit();
         } else {
             throw new MovieNotFoundException("No movie found with id " + id);
         }

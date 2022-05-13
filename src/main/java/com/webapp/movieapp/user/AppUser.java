@@ -64,7 +64,7 @@ public class AppUser implements UserDetails {
     @JoinColumn(name = "user_id")
     private Collection<ConfirmationToken> tokens;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "movie_licenses", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "movie_id", referencedColumnName = "id"))
     private Set<Movie> movies;
 

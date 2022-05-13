@@ -28,6 +28,6 @@ public class UserController {
         } catch (UserNotFoundException e) {
             e.printStackTrace();
         }
-        return "redirect:/users";
+        return "redirect:/login?logout";
     }
 }
